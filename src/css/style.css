@@ -42,6 +42,11 @@ body {
     font-size: 2rem;
 }
 
+.chat-block {
+    width: 100%;
+    height: 90%;
+}
+
 .chat-block ul {
     list-style-type: none;
     font-size: 1.5rem;
@@ -53,4 +58,31 @@ body {
 
 .me {
     text-align: right;
+}
+
+.message-box {
+    max-height: 10%;
+}
+
+.message-box input {
+    display: inline;
+}
+
+.info-box {
+    height: 90%;
+}
+
+.tagline {
+    color: #4eb980;
+    text-align: right;
+}
+
+.button-green {
+    color: white;
+    background-color: #38BF21;
+    border-color: #38BF21;
+}
+
+.button-green:hover {
+    color: #26FF00;
 }
