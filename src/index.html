@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
 
-    <body>
-        <div class="container">
+    <body ng-app="room">
+        <div class="container" ng-controller="homeController">
             <div class="row info-box">
                 <div class="three columns info-block">
                     <div class="logo">
@@ -52,12 +52,7 @@
                 <div class="six columns">
                     <div class="chat-block">
                         <ul>
-                            <li><span class="username">rafej:</span> Well, hello there</li>
-                            <li><span class="username">paked:</span> How great is this?</li>
-                            <li><span class="username">rafej:</span> Pretty sick.</li>
-                            <li><span class="username">rafej:</span> Loving this whole minimal design thing...</li>
-                            <li><span class="username">paked:</span> Yeah. You did a great job desiging it!</li>
-                            <li class="me"><span class="username">samfi:</span> Hey everyone!</li>
+                            <li ng-repeat="message in logs"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
                         </ul>
                     </div>
 
@@ -73,30 +68,13 @@
                 </div>
 
                 <div class="two columns">
-                    <!--<div class="tagline"><span style="width: 1.6rem; height: 1.6rem; color: blue;"></span> big room <i class="fa fa-caret-down"></i></div>-->
                     <h6 class="tagline"><i class="fa fa-circle"></i> big room</h6>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="three columns">
-                    <p></p>
-                </div>
-
-                <div class="six columns">
-                    <!--
-                    <div class="row">
-                        <div class="ten columns">
-                            <input class="u-full-width" type="text"/>
-                        </div>
-
-                        <div class="one column">
-                            <button>Send</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular-websocket/angular-websocket.js"></script>
 
         <script src="js/main.js"></script>
     </body>
