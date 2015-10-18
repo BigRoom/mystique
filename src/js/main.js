@@ -38,12 +38,14 @@ app.factory('Data', ['$websocket', '$rootScope', function($websocket, $rootScope
 
     ws.onOpen(function() {
         console.log('WebSocket opened!');
-        ws.send('SETchat.freenode.net:6667/#roomtest');
+        ws.send({
+            name: 'SET',
+            message: 'chat.freenode.net:6667/#roomtest'
+        });
     });
 
     var methods = {
         sendMessage: function(message) {
-            ws.send(message)
         }
     };
 
