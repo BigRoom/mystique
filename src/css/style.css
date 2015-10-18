@@ -41,3 +41,16 @@ body {
     color: #4eb980;
     font-size: 2rem;
 }
+
+.chat-block ul {
+    list-style-type: none;
+    font-size: 1.5rem;
+}
+
+.username {
+    color: #4eb980;
+}
+
+.me {
+    text-align: right;
+}
