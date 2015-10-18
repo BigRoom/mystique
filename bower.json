@@ -1,0 +1,14 @@
+{
+  "name": "mystique",
+  "version": "0.0.1",
+  "homepage": "https://github.com/BigRoom/mystique",
+  "authors": [
+    "Harrison <harrison@theshoebridges.com>"
+  ],
+  "description": "The frontend of big room",
+  "license": "MIT",
+  "dependencies": {
+    "skeleton": "~2.0.4",
+    "font-awesome": "~4.4.0"
+  }
+}
