@@ -84,5 +84,7 @@ body {
 }
 
 .button-green:hover {
-    color: #26FF00;
+    background-color: rgb(90, 200, 90);
+    color: white;
+    border-color: #38BF21;
 }
