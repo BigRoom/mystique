@@ -1,0 +1,43 @@
+body {
+    padding-top: 20px;
+    font-size: 1.3rem;
+}
+
+.logo-glyph {
+    width: 60%;
+    padding-top: 60%;
+    background-color: #4eb980;
+    border-radius: 60%;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.info-block {
+    text-align: center;    
+}
+
+.info-block hr {
+    border-top-color: #4eb980;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.info-list li {
+    list-style-type: none;
+    margin-bottom: .25rem;
+}
+
+.info-list ul {
+    margin-bottom: .5rem;
+}
+
+.info-list h6 {
+    margin-bottom: .5rem;
+}
+
+.info-list > i.fa {
+    color: #4eb980;
+    font-size: 2rem;
+}

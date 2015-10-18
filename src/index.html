@@ -1,23 +1,63 @@
-<p>Hello, World</p>
+<html>
+    <head>
+        <title>Big Room</title>
 
-<script>
-    var ws = new WebSocket('ws://localhost:6060');
+        <link rel="stylesheet" href="lib/skeleton/css/normalize.css">
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="lib/skeleton/css/skeleton.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-    ws.onopen = function() {
-        console.log('Opened!');
-    }
-    
-    ws.onclose = function() {
-        console.log('Closed!');
-    }
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="three columns info-block">
+                    <div class="logo">
+                        <div class="logo-glyph"></div>
+                        <h3>big room</h3>
+                    </div>
 
-    ws.onerror = function(error) {
-        console.log('We got an error:' + error);
-    }
+                    <div class="info-list">
+                        <h6>Channels <i class="fa fa-plus"></i></h6>
+                        <ul>
+                            <li>#home</li>
+                            <li>#general</li>
+                            <li>#bicycle</li>
+                            <li>#random</li>
+                            <li>#hackEDU</li>
+                        </ul>
 
-    ws.onmessage = function(e) {
-        var m = document.createElement("p");
-        m.textContent = e.data;
-        document.body.appendChild(m);
-    }
-</script>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+
+                    <hr />
+
+                    <div class="info-list">
+                        <h6>People <i class="fa fa-plus"></i></h6>
+                        <ul>
+                            <li>@paked</li>
+                            <li>@rafej</li>
+                            <li>@samfi</li>
+                            <li>@zrl</li>
+                            <li>@msw</li>
+                            <li>@ajb</li>
+                            <li>@ssun</li>
+                        </ul>
+
+                        <i class="fa fa-caret-down"></i>
+                    </div>
+                </div>
+
+                <div class="six columns">
+                    <p>Chatting goes here</p>
+                </div>
+
+                <div class="two columns">
+                    <p style="text-align: right;">Big logo herre</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/main.js"></script>
+    </body>
+</html>
