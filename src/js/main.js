@@ -1,46 +1,54 @@
-var app = angular.module('room', [
-    'angular-websocket'
-]);
+(function() {
+    'use strict';
+    angular.module('room', [
+            'angular-websocket'
+    ]).
+        controller('HomeController', HomeController).
+        factory('chat', chat);
 
-app.factory('Data', ['$websocket', '$rootScope', function($websocket, $rootScope) {
-    var ws = $websocket('ws://localhost:6060');
+    chat.$inject = ['$websocket', '$rootScope'];
+    function chat($websocket, $rootScope) {
+        var ws = $websocket('ws://localhost:6060');
 
-    $rootScope.logs = [];
+        $rootScope.logs = [];
 
-    ws.onMessage(function(message) {
-        console.log(message);
+        ws.onMessage(function(message) {
+            console.log(message);
 
-        var d = JSON.parse(message.data);
-        $rootScope.logs.push(d);
-    });
-
-    ws.onOpen(function() {
-        console.log('WebSocket opened!');
-        ws.send({
-            name: 'SET',
-            message: 'chat.freenode.net:6667/#roomtest'
+            var d = JSON.parse(message.data);
+            $rootScope.logs.push(d);
         });
-    });
 
-    var methods = {
-        sendMessage: function(message) {
+        ws.onOpen(function() {
+            console.log('WebSocket opened!');
             ws.send({
-                name: 'SEND',
-                message: message,
-                channel: 'chat.freenode.net:6667/#roomtest'
+                name: 'SET',
+                message: 'chat.freenode.net:6667/#roomtest'
             });
-        }
-    };
+        });
 
-    return methods;
-}]);
+        var methods = {
+            sendMessage: function(message) {
+                ws.send({
+                    name: 'SEND',
+                    message: message,
+                    channel: 'chat.freenode.net:6667/#roomtest'
+                });
+            }
+        };
 
-app.controller('homeController', ['$scope', 'Data', function($scope, data) {
-    $scope.message = 'Hello';
+        return methods;
 
-    $scope.send = function() {
-        data.sendMessage($scope.text);
-        $scope.text = "";
     }
-}]);
 
+    HomeController.$inject = ['chat'];
+    function HomeController(chat) {
+        var vm = this;
+        vm.message = 'Hello';
+
+        vm.send = function() {
+            chat.sendMessage(vm.text);
+            vm.text = '';
+        };
+    }
+})();
