@@ -24,6 +24,11 @@ app.factory('Data', ['$websocket', '$rootScope', function($websocket, $rootScope
 
     var methods = {
         sendMessage: function(message) {
+            ws.send({
+                name: 'SEND',
+                message: message,
+                channel: 'chat.freenode.net:6667/#roomtest'
+            });
         }
     };
 
@@ -32,5 +37,10 @@ app.factory('Data', ['$websocket', '$rootScope', function($websocket, $rootScope
 
 app.controller('homeController', ['$scope', 'Data', function($scope, data) {
     $scope.message = 'Hello';
+
+    $scope.send = function() {
+        data.sendMessage($scope.text);
+        $scope.text = "";
+    }
 }]);
 

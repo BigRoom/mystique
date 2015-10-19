@@ -58,11 +58,11 @@
 
                     <div class="row">
                         <div class="ten columns">
-                            <input class="u-full-width" type="text"/>
+                            <input class="u-full-width" ng-model="text" type="text"/>
                         </div>
 
                         <div class="one column">
-                            <button class="button button-green">Send</button>
+                            <button ng-click="send();" class="button button-green">Send</button>
                         </div>
                     </div>
                 </div>
