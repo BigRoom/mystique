@@ -21,7 +21,7 @@
             console.log('WebSocket opened!');
             ws.send({
                 name: 'SET',
-                message: 'Chat.freenode.net:6667/#roomtest'
+                message: 'chat.freenode.net:6667/#roomtest'
             });
         });
 
@@ -30,7 +30,7 @@
                 ws.send({
                     name: 'SEND',
                     message: message,
-                    channel: 'Chat.freenode.net:6667/#roomtest'
+                    channel: 'chat.freenode.net:6667/#roomtest'
                 });
             }
         };
