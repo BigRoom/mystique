@@ -1,12 +1,15 @@
 (function() {
     'use strict';
 
+    // This is my local Docker IRC server
+    var defaultHost = '192.168.99.100:6667';
+
     angular.module('app.factories.chat', []).
         factory('chat', Chat);
 
     Chat.$inject = ['$websocket', '$rootScope'];
     function Chat($websocket, $rootScope) {
-        var ws = $websocket('ws://localhost:6060');
+        var ws = $websocket('ws://localhost:6060?server=' + defaultHost);
 
         $rootScope.logs = [];
 
@@ -21,7 +24,7 @@
             console.log('WebSocket opened!');
             ws.send({
                 name: 'SET',
-                message: 'chat.freenode.net:6667/#roomtest'
+                message: defaultHost + '/#roomtest'
             });
         });
 
@@ -30,12 +33,11 @@
                 ws.send({
                     name: 'SEND',
                     message: message,
-                    channel: 'chat.freenode.net:6667/#roomtest'
+                    channel: defaultHost + '/#roomtest'
                 });
             }
         };
 
         return methods;
-
     }
 })();
