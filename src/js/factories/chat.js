@@ -26,6 +26,8 @@
                 name: 'SET',
                 message: defaultHost + '/#roomtest'
             });
+
+            methods.setNick('paked');
         });
 
         var methods = {
@@ -34,6 +36,12 @@
                     name: 'SEND',
                     message: message,
                     channel: defaultHost + '/#roomtest'
+                });
+            },
+            setNick: function(nick) {
+                ws.send({
+                    name: 'NICK',
+                    message: nick
                 });
             }
         };
