@@ -43,6 +43,9 @@
                     name: 'NICK',
                     message: nick
                 });
+            },
+            _send: function(obj) {
+                ws.send(obj);
             }
         };
 
