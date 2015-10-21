@@ -1,15 +1,15 @@
 (function() {
     'use strict';
 
-    // This is my local Docker IRC server
-    var defaultHost = '192.168.99.100:6667';
-
     angular.module('app.factories.chat', []).
         factory('chat', Chat);
 
-    Chat.$inject = ['$websocket', '$rootScope'];
-    function Chat($websocket, $rootScope) {
-        var ws = $websocket('ws://localhost:6060?server=' + defaultHost);
+    Chat.$inject = ['$websocket', '$rootScope', 'connection'];
+    function Chat($websocket, $rootScope, connection) {
+        var host = connection.getHost();
+        var ircHost = host + ':6667';
+
+        var ws = $websocket('ws://' + host +':6060?server=' + ircHost);
 
         $rootScope.logs = [];
 
@@ -24,7 +24,7 @@
             console.log('WebSocket opened!');
             ws.send({
                 name: 'SET',
-                message: defaultHost + '/#roomtest'
+                message: ircHost + '/#roomtest'
             });
 
             methods.setNick('paked');
@@ -35,7 +35,7 @@
                 ws.send({
                     name: 'SEND',
                     message: message,
-                    channel: defaultHost + '/#roomtest'
+                    channel: ircHost + '/#roomtest'
                 });
             },
             setNick: function(nick) {
