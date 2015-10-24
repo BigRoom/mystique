@@ -11,6 +11,8 @@
   // Define globals exposed by modern browsers.
   "browser": true,
 
+  "devel": true,
+
   // Define globals exposed by jQuery.
   "jquery": true,
 
