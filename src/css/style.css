@@ -88,3 +88,7 @@ body {
     color: white;
     border-color: #38BF21;
 }
+
+.active {
+    color: #38BF21;
+}

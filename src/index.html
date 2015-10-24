@@ -22,7 +22,7 @@
                     <div class="info-list">
                         <h6>Channels <i class="fa fa-plus"></i></h6>
                         <ul>
-                            <li>#home</li>
+                            <li class="active">#roomtest</li>
                             <li>#general</li>
                             <li>#bicycle</li>
                             <li>#random</li>
@@ -54,7 +54,7 @@
                 <div class="six columns">
                     <div class="chat-block">
                         <ul>
-                            <li ng-repeat="message in logs"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
+                            <li ng-repeat="message in selected"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
                         </ul>
                     </div>
 

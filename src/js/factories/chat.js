@@ -12,19 +12,24 @@
         var url = 'ws://' + host + ':6060/ws?';
         var ws;
 
+        $rootScope.selected = [];
+
         connection.getToken(function(token) {
             ws = $websocket(url + $.param({
                 'server': ircHost,
                 'access_token': token
             }));
 
-            $rootScope.logs = [];
+            $rootScope.logs = {};
 
             ws.onMessage(function(message) {
-                console.log(message);
-
                 var d = JSON.parse(message.data);
-                $rootScope.logs.push(d);
+                if ($rootScope.logs[d.channel] === undefined) {
+                    $rootScope.logs[d.channel] = [];
+                }
+
+                $rootScope.logs[d.channel].push(d);
+                $rootScope.selected = $rootScope.logs['#roomtest'];
             });
 
             ws.onOpen(function() {
