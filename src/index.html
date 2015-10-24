@@ -19,14 +19,10 @@
                         <h3>big room</h3>
                     </div>
 
-                    <div class="info-list">
+                    <div class="info-list" ng-controller="Channels as channels">
                         <h6>Channels <i class="fa fa-plus"></i></h6>
                         <ul>
-                            <li class="active">#roomtest</li>
-                            <li>#general</li>
-                            <li>#bicycle</li>
-                            <li>#random</li>
-                            <li>#hackEDU</li>
+                            <li ng-repeat="(key,val) in logs">{{ key }}</li>
                         </ul>
 
                         <i class="fa fa-caret-down"></i>
@@ -54,7 +50,7 @@
                 <div class="six columns">
                     <div class="chat-block">
                         <ul>
-                            <li ng-repeat="message in selected"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
+                            <li ng-repeat="message in logs[selected]"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
                         </ul>
                     </div>
 
@@ -85,6 +81,7 @@
         <script src="js/factories/modals.js"></script>
         <script src="js/factories/chat.js"></script>
         <script src="js/controllers/home.js"></script>
+        <script src="js/controllers/channels.js"></script>
 
         <script src="js/main.js"></script>
 

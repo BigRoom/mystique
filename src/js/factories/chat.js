@@ -12,8 +12,6 @@
         var url = 'ws://' + host + ':6060/ws?';
         var ws;
 
-        $rootScope.selected = [];
-
         connection.getToken(function(token) {
             ws = $websocket(url + $.param({
                 'server': ircHost,
@@ -29,7 +27,6 @@
                 }
 
                 $rootScope.logs[d.channel].push(d);
-                $rootScope.selected = $rootScope.logs['#roomtest'];
             });
 
             ws.onOpen(function() {
