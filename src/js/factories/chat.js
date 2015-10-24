@@ -9,25 +9,34 @@
         var host = connection.getHost();
         var ircHost = host + ':6667';
 
-        var ws = $websocket('ws://' + host +':6060?server=' + ircHost);
+        var url = 'ws://' + host + ':6060/ws?';
+        var ws;
 
-        $rootScope.logs = [];
+        connection.getToken(function(token) {
+            ws = $websocket(url + $.param({
+                'server': ircHost,
+                'access_token': token
+            }));
 
-        ws.onMessage(function(message) {
-            console.log(message);
+            $rootScope.logs = [];
 
-            var d = JSON.parse(message.data);
-            $rootScope.logs.push(d);
-        });
+            ws.onMessage(function(message) {
+                console.log(message);
 
-        ws.onOpen(function() {
-            console.log('WebSocket opened!');
-            ws.send({
-                name: 'SET',
-                message: ircHost + '/#roomtest'
+                var d = JSON.parse(message.data);
+                $rootScope.logs.push(d);
             });
 
-            methods.setNick('paked');
+            ws.onOpen(function() {
+                console.log('WebSocket opened!');
+                ws.send({
+                    name: 'SET',
+                    message: ircHost + '/#roomtest'
+                });
+
+                methods.setNick('paked');
+            });
+
         });
 
         var methods = {

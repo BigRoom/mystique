@@ -19,6 +19,19 @@
                 }
 
                 return addr;
+            },
+            getToken: function(cb) {
+                var token = localStorage.token;
+                if (token === undefined) {
+                    token = prompt('What is your token?');
+                    localStorage.token = token;
+                }
+
+                if (cb !== undefined) {
+                    cb.call(this, token);
+                }
+
+                return token;
             }
         };
 
