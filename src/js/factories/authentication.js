@@ -16,7 +16,9 @@
                 }).
                 then(function(data) {
                     console.log(data);
-                    cb.call(null, data.data.data);
+                    if (cb !== undefined) {
+                        cb.call(this, data.data.data);
+                    }                           
                 });
             },
             register: function(username, password, email, cb) {

@@ -6,6 +6,7 @@
             'app.controllers.home',
             'app.factories.chat',
             'app.factories.connection',
-            'app.factories.authentication'
+            'app.factories.authentication',
+            'app.factories.modals'
     ]);
 })();
