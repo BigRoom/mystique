@@ -3,9 +3,10 @@
         <title>Big Room</title>
 
         <link rel="stylesheet" href="lib/skeleton/css/normalize.css">
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="lib/skeleton/css/skeleton.css">
-        <link rel="stylesheet" href="lib/vex/css/vex-theme-default.css">
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="lib/vex/css/vex.css">
+        <link rel="stylesheet" href="lib/vex/css/vex-theme-os.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -76,12 +77,19 @@
         
         <script src="lib/jquery/dist/jquery.min.js"></script>
         <script src="lib/vex/js/vex.combined.min.js"></script>
+            <script>vex.defaultOptions.className = 'vex-theme-os';</script>
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular-websocket/angular-websocket.js"></script>
+        <script src="js/factories/authentication.js"></script>
         <script src="js/factories/connection.js"></script>
         <script src="js/factories/chat.js"></script>
         <script src="js/controllers/home.js"></script>
 
         <script src="js/main.js"></script>
+
+        <div style="display: none;" id="auth">
+            <input type="text" name="username" placeholder="username"/>
+            <input type="text" name="password" placeholder="password"/>
+        </div>
     </body>
 </html>

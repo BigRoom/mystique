@@ -4,9 +4,9 @@
     angular.module('app.factories.connection', []).
         factory('connection', Connection);
 
-    Connection.$inject = [];
+    Connection.$inject = ['authentication'];
 
-    function Connection() {
+    function Connection(authentication) {
         var methods = {
             setHost: function(addr) {
                 localStorage.addr = addr;
@@ -22,13 +22,29 @@
             },
             getToken: function(cb) {
                 var token = localStorage.token;
-                if (token === undefined) {
-                    token = prompt('What is your token?');
-                    localStorage.token = token;
-                }
+                if (token === undefined || token === 'undefined') {
+                    console.log('py');
+                    vex.dialog.open({
+                        message: 'Enter your login:',
+                        input: $('#auth').html(),
+                        callback: function(data) {
+                            console.log(data);
 
-                if (cb !== undefined) {
-                    cb.call(this, token);
+                            authentication.login(data.username, data.password,
+                                    function(token) {
+                                        if (cb !== undefined) {
+                                            cb.call(this, token);
+                                        }                           
+                                    });
+                        },
+                        buttons: [
+                            $.extend({}, vex.dialog.buttons.YES, {
+                                text: 'Login'
+                            })
+                        ]
+                    });
+
+                    localStorage.token = token;
                 }
 
                 return token;

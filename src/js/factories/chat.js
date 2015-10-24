@@ -33,8 +33,6 @@
                     name: 'SET',
                     message: ircHost + '/#roomtest'
                 });
-
-                methods.setNick('paked');
             });
 
         });
