@@ -11,6 +11,8 @@
     "skeleton": "~2.0.4",
     "font-awesome": "~4.4.0",
     "angular": "~1.4.7",
-    "angular-websocket": "~1.0.14"
+    "angular-websocket": "~1.0.14",
+    "vex": "~2.3.2",
+    "jquery": "~2.1.4"
   }
 }
