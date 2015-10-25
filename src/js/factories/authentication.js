@@ -8,7 +8,7 @@
     function Authentication($http) {
         var methods = {
             login: function(username, password, cb) {
-                $http.get('http://192.168.99.100' + ':6060/users', {
+                $http.get('/api/users', {
                     params: {
                         'username': username,
                         'password': password
@@ -22,7 +22,7 @@
                 });
             },
             register: function(username, password, email, cb) {
-                $http.post('http://192.168.99.100' + ':6060/users', {},
+                $http.post('/api/users', {},
                 {
                     params: {
                         'username': username,
@@ -34,6 +34,17 @@
                 then(function(data) {
                     console.log(data);
                     methods.login(username, password, cb);
+                });
+            },
+            validate: function(token, cb) {
+                $http.get('/api/users/me', {
+                    'access_token': token
+                }).
+                then(function(data) {
+                    var ok = !data.status.error;
+                    var user = data.data;
+
+                    cb.call(this, ok, user);
                 });
             }
         };

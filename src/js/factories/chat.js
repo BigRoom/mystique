@@ -9,7 +9,7 @@
         var host = connection.getHost();
         var ircHost = host + ':6667';
 
-        var url = 'ws://' + host + ':6060/ws?';
+        var url = 'ws://' + host + '/api/ws?';
         var ws;
 
         connection.getToken(function(token) {
@@ -33,7 +33,7 @@
                 console.log('WebSocket opened!');
                 ws.send({
                     name: 'SET',
-                    message: ircHost + '/#roomtest'
+                    message: ircHost + '/' + $rootScope.selected
                 });
             });
 
