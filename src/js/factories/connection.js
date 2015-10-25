@@ -4,9 +4,9 @@
     angular.module('app.factories.connection', []).
         factory('connection', Connection);
 
-    Connection.$inject = ['modals'];
+    Connection.$inject = ['modals', 'authentication'];
 
-    function Connection(modals) {
+    function Connection(modals, authentication) {
         var methods = {
             setHost: function(addr) {
                 localStorage.addr = addr;
@@ -20,13 +20,27 @@
 
                 return addr;
             },
-            getToken: function(cb) {
+            getToken: function(cb, override) {
                 var token = localStorage.token;
-                if (token === undefined || token === 'undefined') {
-                    modals.login(cb);
+                if (token === undefined || override) {
+                    modals.login(function(token) {
+                        methods.valid(token, cb);
+                    });
+
+                    return;
                 }
 
-                cb.call(null, token);
+                methods.valid(token, cb);
+            },
+            valid: function(token, cb) {
+                authentication.validate(token, function(ok) {
+                    if (!ok) {
+                        methods.getToken(cb, true);
+                        return;
+                    }
+
+                    cb.call(this, token);
+                });
             }
 
         };

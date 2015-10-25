@@ -37,12 +37,15 @@
                 });
             },
             validate: function(token, cb) {
+                console.log(token);
                 $http.get('/api/users/me', {
-                    'access_token': token
+                    params: {
+                        'access_token': token
+                    }
                 }).
                 then(function(data) {
-                    var ok = !data.status.error;
-                    var user = data.data;
+                    var ok = !data.data.status.error;
+                    var user = data.data.data;
 
                     cb.call(this, ok, user);
                 });
