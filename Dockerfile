@@ -1,7 +1,7 @@
 FROM node 
 MAINTAINER Harrison Shoebridge <harrison@theshoebridges.com>
 
-ADD . /app
+RUN git clone https://github.com/bigroom/mystique.git /app
 
 RUN npm install -g bower http-server
 
