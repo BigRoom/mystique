@@ -4,21 +4,22 @@
     angular.module('app.factories.connection', []).
         factory('connection', Connection);
 
-    Connection.$inject = ['modals', 'authentication'];
+    Connection.$inject = ['$http', 'modals', 'authentication'];
 
-    function Connection(modals, authentication) {
+    function Connection($http, modals, authentication) {
         var methods = {
             setHost: function(addr) {
                 localStorage.addr = addr;
             },
-            getHost: function() {
-                var addr = localStorage.addr;
-                if (addr === undefined) {
-                    addr = prompt('Enter the Big Room host');
-                    methods.setHost(addr);
-                }
+            getHost: function(cb) {
+                $http.get('/api/servers/default').
+                then(function(resp) {
+                    if (resp.data.status.error) {
+                        return alert('Could not connect to Big Room');
+                    }
 
-                return addr;
+                    cb.call(this, resp.data.data.server);
+                });
             },
             getToken: function(cb, override) {
                 var token = localStorage.token;
