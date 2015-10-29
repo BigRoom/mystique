@@ -14,6 +14,7 @@
             var url = 'ws://' + host + '/api/ws?';
 
             connection.getToken(function(token) {
+                console.log('create');
                 ws = $websocket(url + $.param({
                     'server': ircHost,
                     'access_token': token
@@ -23,18 +24,36 @@
 
                 ws.onMessage(function(message) {
                     var d = JSON.parse(message.data);
-                    if ($rootScope.logs[d.channel] === undefined) {
-                        $rootScope.logs[d.channel] = [];
-                    }
+                    console.log(d);
+                    switch (d.name) {
+                        case 'MESSAGE':
+                            if ($rootScope.logs[d.contents.channel] === undefined) {
+                                $rootScope.logs[d.contents.channel] = [];
+                            }
 
-                    $rootScope.logs[d.channel].push(d);
-                });
+                            $rootScope.logs[d.contents.channel].push(d.contents);
+
+                            break;
+                        case 'CHANNELS':
+                            for (var i = 0; i < d.contents.channels; i++) {
+                                $rootScope.logs[d.contents.channels[i]] = [];
+                            }
+
+                            break;
+                        default:
+                            console.log('Unkown message was sent');
+                    }
+                                    });
 
                 ws.onOpen(function() {
                     console.log('WebSocket opened!');
                     ws.send({
                         name: 'SET',
                         message: ircHost + '/' + $rootScope.selected
+                    });
+
+                    ws.send({
+                        name: 'CHANNELS'
                     });
                 });
 
