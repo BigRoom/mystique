@@ -8,6 +8,22 @@
     function Chat($websocket, $rootScope, connection) {
         var ws;
         var methods = {};
+
+        var handlers = {
+            'MESSAGE': function(d) {
+                if ($rootScope.logs[d.channel] === undefined) {
+                    $rootScope.logs[d.channel] = [];
+                }
+
+                $rootScope.logs[d.channel].push(d);
+            },
+            'CHANNELS': function(d) {
+                for (var i = 0; i < d.channels; i++) {
+                    $rootScope.logs[d.channels[i]] = [];
+                }
+            }
+        };
+
         connection.getHost(function(host) {
             var ircHost = host + ':6667';
 
@@ -24,26 +40,8 @@
 
                 ws.onMessage(function(message) {
                     var d = JSON.parse(message.data);
-                    console.log(d);
-                    switch (d.name) {
-                        case 'MESSAGE':
-                            if ($rootScope.logs[d.contents.channel] === undefined) {
-                                $rootScope.logs[d.contents.channel] = [];
-                            }
-
-                            $rootScope.logs[d.contents.channel].push(d.contents);
-
-                            break;
-                        case 'CHANNELS':
-                            for (var i = 0; i < d.contents.channels; i++) {
-                                $rootScope.logs[d.contents.channels[i]] = [];
-                            }
-
-                            break;
-                        default:
-                            console.log('Unkown message was sent');
-                    }
-                                    });
+                    handlers[d.name].call(this, d.contents);
+                });
 
                 ws.onOpen(function() {
                     console.log('WebSocket opened!');

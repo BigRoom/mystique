@@ -15,12 +15,14 @@
                     input: $('#auth').html(),
                     callback: function(data) {
                         console.log('In callback with data %s', data);
+                        console.log(data);
                         if (data === false) {
                             return;
                         }
 
                         authentication.login(data.username, data.password,
                                 function(token) {
+                                    console.log(token);
                                     if (cb !== undefined) {
                                         cb.call(this, token);
                                     }                           

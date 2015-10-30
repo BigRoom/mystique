@@ -16,6 +16,7 @@
                 }).
                 then(function(data) {
                     console.log(data);
+                    console.log('PARTY');
                     if (cb !== undefined) {
                         cb.call(this, data.data.data);
                     }                           

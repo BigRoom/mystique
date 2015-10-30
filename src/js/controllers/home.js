@@ -10,8 +10,11 @@
         vm.message = 'Hello';
 
         vm.send = function() {
+            console.log(chat);
             chat.sendMessage(vm.text);
             vm.text = '';
         };
+
+        console.log(chat);
     }
 })();
