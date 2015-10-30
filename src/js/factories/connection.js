@@ -34,13 +34,13 @@
                 methods.valid(token, cb);
             },
             valid: function(token, cb) {
-                authentication.validate(token, function(ok) {
+                authentication.validate(token, function(ok, user) {
                     if (!ok) {
                         methods.getToken(cb, true);
                         return;
                     }
 
-                    cb.call(this, token);
+                    cb.call(this, token, user);
                 });
             }
 

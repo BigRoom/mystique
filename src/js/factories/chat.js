@@ -31,7 +31,8 @@
 
             var url = 'ws://' + host + '/api/ws?';
 
-            connection.getToken(function(token) {
+            connection.getToken(function(token, user) {
+                $rootScope.user = user;
                 console.log('create');
                 ws = $websocket(url + $.param({
                     'server': ircHost,

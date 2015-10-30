@@ -92,3 +92,7 @@ body {
 .active {
     color: #38BF21;
 }
+
+.right {
+    text-align: right;
+}
