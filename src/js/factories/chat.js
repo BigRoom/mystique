@@ -18,8 +18,10 @@
                 $rootScope.logs[d.channel].push(d);
             },
             'CHANNELS': function(d) {
-                for (var i = 0; i < d.channels; i++) {
-                    $rootScope.logs[d.channels[i]] = [];
+                console.log(d, d.length);
+                for (var i = 0; i < d.length; i++) {
+                    console.log(d[i]);
+                    $rootScope.logs[d[i]] = [];
                 }
             }
         };
