@@ -8,7 +8,7 @@
 
     function Scrollback($http, connection) {
         var methods = {
-            get: function(offset, cb) {
+            get: function(page, cb) {
                 connection.getHost(function(host) {
                     connection.getToken(function(token) {
                         var ip = host + '%3A6667';
@@ -16,11 +16,24 @@
 
                         $http.get(url, {
                             params: {
-                                'offset': offset,
+                                'page': page,
                                 'access_token': token
                             }
                         }).
                         then(function(data) {
+                            if (data.data.status.error) {
+                                return;
+                            }
+
+                            if (data.data.data === null) {
+                                return;
+                            }
+
+                            if (data.data.data.length === 0) {
+                                console.log('No results!');
+                                return;
+                            }
+
                             cb.call(this, data);
                         });
                     });

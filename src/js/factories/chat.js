@@ -78,24 +78,32 @@
                     ws.send(obj);
                 };
 
-                scrollback.get(0, function(data) {
-                    console.log('scrollback activated');
-                    console.log(data);
-                    for (var i = 0; i < data.data.data.length; i++) {
-                        var msg = data.data.data[i];
+                function doScrollback(page) {
+                    scrollback.get(page, function(data) {
+                        (function(page) {
+                            console.log('scrollback activated');
+                            console.log(data);
+                            for (var i = 0; i < data.data.data.length; i++) {
+                                var msg = data.data.data[i];
 
-                        $rootScope.logs['#roomtest'].unshift({
-                            'from': msg.User,
-                            'content': msg.Content,
-                        });
-                    }
+                                $rootScope.logs['#roomtest'].unshift({
+                                    'from': msg.User,
+                                    'content': msg.Content,
+                                });
+                            }
 
-                    var c = angular.element('.chat-block');
+                            var c = angular.element('.chat-block');
 
-                    setTimeout(function() {
-                        c.scrollTop(c.height());
-                    }, 50);
-                });
+                            setTimeout(function() {
+                                c.scrollTop(c.height());
+                            }, 50);
+
+                            doScrollback(page + 1);
+                        })(page);
+                    });
+                }
+
+                doScrollback(0);
             });
 
         });
