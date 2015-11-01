@@ -87,8 +87,8 @@
                                 var msg = data.data.data[i];
 
                                 $rootScope.logs['#roomtest'].unshift({
-                                    'from': msg.User,
-                                    'content': msg.Content,
+                                    'from': msg.user,
+                                    'content': msg.content,
                                 });
                             }
 
