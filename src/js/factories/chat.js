@@ -89,6 +89,12 @@
                             'content': msg.Content,
                         });
                     }
+
+                    var c = angular.element('.chat-block');
+
+                    setTimeout(function() {
+                        c.scrollTop(c.height());
+                    }, 50);
                 });
             });
 
