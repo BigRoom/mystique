@@ -4,8 +4,8 @@
     angular.module('app.factories.chat', []).
         factory('chat', Chat);
 
-    Chat.$inject = ['$websocket', '$rootScope', 'connection'];
-    function Chat($websocket, $rootScope, connection) {
+    Chat.$inject = ['$websocket', '$rootScope', 'connection', 'scrollback'];
+    function Chat($websocket, $rootScope, connection, scrollback) {
         var ws;
         var methods = {};
 
@@ -18,10 +18,11 @@
                 $rootScope.logs[d.channel].push(d);
             },
             'CHANNELS': function(d) {
-                console.log(d, d.length);
                 for (var i = 0; i < d.length; i++) {
                     console.log(d[i]);
-                    $rootScope.logs[d[i]] = [];
+                    if ($rootScope.logs[d[i]] === undefined) {
+                        $rootScope.logs[d[i]] = [];
+                    }
                 }
             }
         };
@@ -76,6 +77,19 @@
                 methods._send = function(obj) {
                     ws.send(obj);
                 };
+
+                scrollback.get(0, function(data) {
+                    console.log('scrollback activated');
+                    console.log(data);
+                    for (var i = 0; i < data.data.data.length; i++) {
+                        var msg = data.data.data[i];
+
+                        $rootScope.logs['#roomtest'].unshift({
+                            'from': msg.User,
+                            'content': msg.Content,
+                        });
+                    }
+                });
             });
 
         });
