@@ -78,6 +78,7 @@
                 methods._send = function(obj) {
                     ws.send(obj);
                 };
+
                 function doScrollback(page) {
                     scrollback.get(page, function(data) {
                         (function(page) {
@@ -108,9 +109,10 @@
     }
 
     function adjustBottom() {
+        console.log('adjusting to bottom');
         var c = angular.element('.chat-block');
         setTimeout(function() {
-            c.scrollTop(c.height());
+            c.scrollTop(c.height() * 1.5);
         }, 50);
     }
 })();
