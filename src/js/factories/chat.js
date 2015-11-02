@@ -16,6 +16,7 @@
                 }
 
                 $rootScope.logs[d.channel].push(d);
+                adjustBottom();
             },
             'CHANNELS': function(d) {
                 for (var i = 0; i < d.length; i++) {
@@ -77,7 +78,6 @@
                 methods._send = function(obj) {
                     ws.send(obj);
                 };
-
                 function doScrollback(page) {
                     scrollback.get(page, function(data) {
                         (function(page) {
@@ -92,11 +92,7 @@
                                 });
                             }
 
-                            var c = angular.element('.chat-block');
-
-                            setTimeout(function() {
-                                c.scrollTop(c.height());
-                            }, 50);
+                            adjustBottom();
 
                             doScrollback(page + 1);
                         })(page);
@@ -109,5 +105,12 @@
         });
 
         return methods;
+    }
+
+    function adjustBottom() {
+        var c = angular.element('.chat-block');
+        setTimeout(function() {
+            c.scrollTop(c.height());
+        }, 50);
     }
 })();
