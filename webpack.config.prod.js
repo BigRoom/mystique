@@ -24,6 +24,10 @@ module.exports = {
       }
     })
   ],
+  resolve: {
+    root: path.resolve('./src'),
+    extensions: ['', '.js']
+  },
   module: {
     loaders: [{
       test: /\.js$/,
