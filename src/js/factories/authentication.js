@@ -45,7 +45,7 @@
                     }
                 }).
                 then(function(data) {
-                    var ok = !data.data.status.error;
+                    var ok = !data.data.error;
                     var user = data.data.data;
 
                     cb.call(this, ok, user);

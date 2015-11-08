@@ -14,7 +14,7 @@
             getHost: function(cb) {
                 $http.get('/api/servers/default').
                 then(function(resp) {
-                    if (resp.data.status.error) {
+                    if (resp.data.error) {
                         return alert('Could not connect to Big Room');
                     }
 
