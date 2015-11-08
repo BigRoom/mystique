@@ -25,6 +25,8 @@
                     if ($rootScope.logs[d[i]] === undefined) {
                         $rootScope.logs[d[i]] = [];
                     }
+
+                    methods.scrollback(d[i]);
                 }
             }
         };
@@ -51,18 +53,14 @@
 
                 ws.onOpen(function() {
                     console.log('WebSocket opened!');
-                    ws.send({
-                        name: 'SET',
-                        message: ircHost + '/' + $rootScope.selected
-                    });
 
-                    ws.send({
-                        name: 'SET',
-                        message: ircHost + '/#other' 
-                    });
+                    // join default room
+                    methods.join('#roomtest');
 
+                    // set default channels
                     ws.send({
-                        name: 'CHANNELS'
+                        name: 'CHANNELS',
+                        Message: ircHost
                     });
                 });
 
@@ -89,8 +87,8 @@
                     ws.send({
                         name :'SET',
                         message: ircHost + '/' + channel
-                    })
-                }
+                    });
+                };
 
                 methods.scrollback = function(channel, page) {
                     page = page || 0;
@@ -113,11 +111,7 @@
                         })(channel, page);
                     });
                 }
-
-                methods.scrollback('#roomtest', 0);
-                methods.scrollback('#other', 0);
             });
-
         });
 
         return methods;
