@@ -22,7 +22,7 @@
                     <div class="info-list" ng-controller="Channels as channels">
                         <h6>Channels <i class="fa fa-plus"></i></h6>
                         <ul>
-                            <li ng-repeat="(key,val) in logs">{{ key }}</li>
+                            <li ng-click="channels.selectChannel(key)" ng-repeat="(key,val) in logs">{{ key }}</li>
                         </ul>
 
                         <i class="fa fa-caret-down"></i>

@@ -10,7 +10,10 @@
 
         $rootScope.selected = '#roomtest';
         vm.selectChannel = function(channel) {
+            console.log(channel);
             vm.selected = channel;
+
+            $rootScope.selected = channel;
         };
     }
 })();

@@ -8,11 +8,11 @@
 
     function Scrollback($http, connection) {
         var methods = {
-            get: function(page, cb) {
+            get: function(channel, page, cb) {
                 connection.getHost(function(host) {
                     connection.getToken(function(token) {
                         var ip = host + '%3A6667';
-                        var url = '/api/servers/' + ip + '/roomtest/scrollback';
+                        var url = '/api/servers/' + ip + '/' + channel.substr(1) +'/scrollback';
 
                         $http.get(url, {
                             params: {

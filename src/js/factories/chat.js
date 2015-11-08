@@ -16,6 +16,7 @@
                 }
 
                 $rootScope.logs[d.channel].push(d);
+                console.log("%s [%s]: %s", d.from, d.channel, d.content)
                 adjustBottom();
             },
             'CHANNELS': function(d) {
@@ -56,6 +57,11 @@
                     });
 
                     ws.send({
+                        name: 'SET',
+                        message: ircHost + '/#other' 
+                    });
+
+                    ws.send({
                         name: 'CHANNELS'
                     });
                 });
@@ -64,7 +70,7 @@
                     ws.send({
                         name: 'SEND',
                         message: message,
-                        channel: ircHost + '/#roomtest'
+                        channel: ircHost + '/' + $rootScope.selected
                     });
                 };
 
@@ -79,15 +85,15 @@
                     ws.send(obj);
                 };
 
-                function doScrollback(page) {
-                    scrollback.get(page, function(data) {
-                        (function(page) {
+                function doScrollback(channel, page) {
+                    scrollback.get(channel, page, function(data) {
+                        (function(channel, page) {
                             console.log('scrollback activated');
                             console.log(data);
                             for (var i = 0; i < data.data.data.length; i++) {
                                 var msg = data.data.data[i];
 
-                                $rootScope.logs['#roomtest'].unshift({
+                                $rootScope.logs[channel].unshift({
                                     'from': msg.user,
                                     'content': msg.content,
                                 });
@@ -95,12 +101,13 @@
 
                             adjustBottom();
 
-                            doScrollback(page + 1);
-                        })(page);
+                            doScrollback(channel, page + 1);
+                        })(channel, page);
                     });
                 }
 
-                doScrollback(0);
+                doScrollback('#roomtest', 0);
+                doScrollback('#other', 0);
             });
 
         });
