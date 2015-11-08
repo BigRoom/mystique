@@ -1,23 +1,21 @@
 {
-  "extends" : "airbnb",
-  "env"     : {
-    "browser" : true
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
   },
-  "globals" : {
-    "__DEV__"      : false,
-    "__PROD__"     : false,
-    "__DEBUG__"    : false,
-    "__DEBUG_NW__" : false
+  "env": {
+    "browser": true,
+    "node": true
   },
+  "parser": "babel-eslint",
   "rules": {
-    "comma-dangle" : [1, "never"],
-    "func-names"   : 0,
-    "key-spacing"  : 0,
-    "space-before-function-paren" : [2, "always"],
-    "no-else-return"   : 0,
-    "no-multi-spaces"  : 0,
-    "quotes"           : [2, "single"],
-    "jsx-quotes"       : [2, "prefer-single"],
-    "one-var"          : 0
-  }
+    "quotes": [2, "single"],
+    "strict": [2, "never"],
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2
+  },
+  "plugins": [
+    "react"
+  ]
 }
