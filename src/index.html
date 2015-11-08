@@ -20,9 +20,9 @@
                     </div>
 
                     <div class="info-list" ng-controller="Channels as channels">
-                        <h6>Channels <i class="fa fa-plus"></i></h6>
+                        <h6>Channels <i ng-click="channels.add()" class="fa fa-plus"></i></h6>
                         <ul>
-                            <li ng-class="{'active': key == selected}" ng-click="channels.selectChannel(key)" ng-repeat="(key,val) in logs">{{ key }}</li>
+                            <li ng-class="{'active': key == selected}" ng-click="channels.select(key)" ng-repeat="(key,val) in logs">{{ key }}</li>
                         </ul>
 
                         <i class="fa fa-caret-down"></i>

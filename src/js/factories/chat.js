@@ -85,7 +85,15 @@
                     ws.send(obj);
                 };
 
-                function doScrollback(channel, page) {
+                methods.join = function(channel) {
+                    ws.send({
+                        name :'SET',
+                        message: ircHost + '/' + channel
+                    })
+                }
+
+                methods.scrollback = function(channel, page) {
+                    page = page || 0;
                     scrollback.get(channel, page, function(data) {
                         (function(channel, page) {
                             console.log('scrollback activated');
@@ -101,13 +109,13 @@
 
                             adjustBottom();
 
-                            doScrollback(channel, page + 1);
+                            methods.scrollback(channel, page + 1);
                         })(channel, page);
                     });
                 }
 
-                doScrollback('#roomtest', 0);
-                doScrollback('#other', 0);
+                methods.scrollback('#roomtest', 0);
+                methods.scrollback('#other', 0);
             });
 
         });
