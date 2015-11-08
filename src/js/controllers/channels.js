@@ -18,8 +18,8 @@
 
         vm.add = function() {
             vex.dialog.prompt({
-                message: 'What planet did the aliens come from?',
-                placeholder: 'Planet name',
+                message: 'What channel do you want to join?',
+                placeholder: 'Channel name #...',
                 callback: function(value) {
                     if (!value) {
                         return;
