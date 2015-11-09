@@ -120,8 +120,9 @@
     function adjustBottom() {
         console.log('adjusting to bottom');
         var c = angular.element('.chat-block');
+        var u = angular.element('.chat-block ul')
         setTimeout(function() {
-            c.scrollTop(c.height() * 1.5);
+            c.scrollTop(u.innerHeight());
         }, 50);
     }
 })();
