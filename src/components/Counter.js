@@ -24,7 +24,7 @@ export class Counter extends Component {
 
   render() {
     return (
-      <h1 style={{ color: this.props.color }}>
+      <h1 style={{ color: this.props.color }} className='counter'>
         Counter ({this.props.increment}): {this.state.counter}
       </h1>
     );

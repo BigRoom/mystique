@@ -33,6 +33,17 @@ module.exports = {
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
+    },{
+      test: /\.scss$/,
+      loaders: [
+        'style-loader',
+        'css-loader',
+        'autoprefixer?browsers=last 2 version',
+        'sass-loader'
+      ]
     }]
+  },
+  sassLoader: {
+    includePaths: path.resolve('./src/styles')
   }
 };

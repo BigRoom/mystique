@@ -1,0 +1,22 @@
+{
+  "user": {
+    "username": "String",
+    "email": "Email",
+    "id": "String"
+  },
+  "chat": {
+    "channels": [
+      {
+        "name": "String",
+        "users": ["String"],
+        "messages": [
+          {
+            "from": "String",
+            "content": "String",
+            "timestamp": "Date"
+          }
+        ]
+      }
+    ]
+  }
+}
