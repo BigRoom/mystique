@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Counter extends Component {
+export class Counter extends Component {
+  static propTypes = {
+    increment: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = { counter: 0 };
@@ -20,7 +25,7 @@ export default class Counter extends Component {
   render() {
     return (
       <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter} ({this.state.counter / 60})
+        Counter ({this.props.increment}): {this.state.counter}
       </h1>
     );
   }
