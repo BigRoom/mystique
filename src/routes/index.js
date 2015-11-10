@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Router, Route } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import { App } from 'components/App';
-import { Counters } from 'components/Counters'
+import { Counters } from 'components/Counters';
 
 export default (
   <Router history={createBrowserHistory()}>

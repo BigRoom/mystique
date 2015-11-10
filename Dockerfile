@@ -1,12 +1,14 @@
-FROM node
-MAINTAINER Harrison Shoebridge <harrison@theshoebridges.com>
-
-RUN git clone https://github.com/bigroom/mystique.git /app
-
-RUN npm install -g bower http-server
+FROM node:5.0.0
+MAINTAINER Alex Bierwagen <me@alexb.io>
 
 WORKDIR /app
 
-RUN bower install --allow-root
+COPY package.json /app
 
-CMD http-server /app/src
+RUN npm install
+
+COPY . /app
+
+RUN npm run build
+
+CMD npm run deploy
