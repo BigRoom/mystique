@@ -45,7 +45,10 @@ body {
 .chat-block {
     width: 100%;
     height: 90%;
+
     overflow-y: scroll;
+
+    padding-right: 1vw;
 }
 
 .chat-block ul {
