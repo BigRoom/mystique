@@ -1,32 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 
-export class Counter extends Component {
+export default class Counter extends Component {
   static propTypes = {
-    increment: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
+    increment: PropTypes.func.isRequired,
+    decrement: PropTypes.func.isRequired,
+    counter: PropTypes.number.isRequired
   }
 
   render() {
+    const { increment, decrement, increment_five, counter } = this.props;
     return (
-      <h1 style={{ color: this.props.color }} className='counter'>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
+      <div className='counter'>
+        <h1>Clicked {counter} times</h1>
+        <button onClick={increment}>+</button>
+        <button onClick={decrement}>-</button>
+        <button onClick={increment_five}>+5</button>
+      </div>
     );
   }
 };

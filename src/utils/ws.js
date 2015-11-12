@@ -1,6 +1,6 @@
 export class Socket {
   constructor(host) {
-    this.ircHost = host + ":6697";
+    this.ircHost = host + ':6697';
     this.ws = new WebSocket('ws://'+host+'/api/ws');
 
     this.ws.onOpen(() => {
@@ -14,5 +14,5 @@ export class Socket {
       name,
       ...data
     });
-  }
+  };
 };

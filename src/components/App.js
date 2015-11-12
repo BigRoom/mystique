@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div>
-        <Link to='/counters'>Counters</Link>
+        <Link to='/counter'>Counter</Link>
         {this.props.children}
       </div>
     );
