@@ -1,4 +1,4 @@
-import { INCREMENT, INCREMENT_FIVE, DECREMENT } from 'constants/counter';
+import { INCREMENT, INCREMENT_FIVE, DECREMENT, DECREMENT_FIVE } from 'constants/counter';
 
 export default function counter(state = 0, action) {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default function counter(state = 0, action) {
       return state - 1;
     case INCREMENT_FIVE:
       return state + 5;
+    case DECREMENT_FIVE:
+      return state - 5;
     default:
       return state;
   };
