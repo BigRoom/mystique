@@ -13,14 +13,12 @@ const finalCreateStore = compose(
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);
 
-export default function configureStore(initialState) {
-  const store = finalCreateStore(reducers, initialState);
+const store = finalCreateStore(reducers);
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(combineReducers(require('../reducers')));
-    });
-  }
-
-  return store;
+if (module.hot) {
+  module.hot.accept('../reducers', () => {
+    store.replaceReducer(combineReducers(require('../reducers')));
+  });
 }
+
+export default store;
