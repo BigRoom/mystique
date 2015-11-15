@@ -6,10 +6,9 @@ import * as CounterActions    from 'actions/counter';
 
 class CounterApp extends Component {
   render() {
-    const { counter, dispatch } = this.props;
+    const { counter } = this.props;
     return (
-      <Counter counter={counter}
-               {...bindActionCreators(CounterActions, dispatch)} />
+      <Counter counter={counter} {...this.props} />
     )
   }
 }
@@ -20,4 +19,9 @@ function select(state) {
   }
 }
 
-export default connect(select)(CounterApp);
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(CounterActions, dispatch);
+}
+
+export default connect(select, mapDispatchToProps)(CounterApp);
