@@ -4,5 +4,5 @@ export default {
   increment: () => ({ type: INCREMENT }),
   increment_five: () => ({ type: INCREMENT_FIVE }),
   decrement: () => ({ type: DECREMENT }),
-  decrement_five: () => ({ type: DECREMENT_FIVE }),
+  decrement_five: () => ({ type: DECREMENT_FIVE })
 };

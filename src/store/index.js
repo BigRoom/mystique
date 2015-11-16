@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose }                  from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { persistState }                                           from 'redux-devtools';
 import reducers                                                   from 'reducers/index';
 import createLogger                                               from 'redux-logger';
@@ -7,8 +7,23 @@ import thunk                                                      from 'redux-th
 
 const logger = createLogger();
 
+const crashReporter = store => next => action => {
+  try {
+    return next(action)
+  } catch (err) {
+    console.error('Caught an exception!', err)
+    Raven.captureException(err, {
+      extra: {
+        action,
+        state: store.getState()
+      }
+    })
+    throw err
+  }
+}
+
 const finalCreateStore = compose(
-  applyMiddleware(thunk, logger),
+  applyMiddleware(thunk, logger, crashReporter),
   DevTools.instrument(),
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);

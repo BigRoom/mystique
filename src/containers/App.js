@@ -4,6 +4,10 @@ import DevTools                                                   from 'containe
 import Wrapper                                                    from 'containers/Wrapper';
 
 export default class App extends Component {
+  componentDidMount() {
+    // use require since import and export can only appear at the top level
+    require('events/websocket')
+  }
   render() {
     const { store } = this.props;
     return (

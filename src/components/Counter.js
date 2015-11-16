@@ -7,7 +7,7 @@ export default class Counter extends Component {
     increment_five: PropTypes.func.isRequired,
     decrement_five: PropTypes.func.isRequired,
     counter: PropTypes.number.isRequired
-  }
+  };
 
   render() {
     const {

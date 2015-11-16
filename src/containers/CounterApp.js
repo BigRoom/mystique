@@ -9,7 +9,7 @@ class CounterApp extends Component {
     const { counter } = this.props;
     return (
       <Counter counter={counter} {...this.props} />
-    )
+    );
   }
 }
 
@@ -17,7 +17,7 @@ function select(state) {
   return {
     counter: state.counter
   }
-}
+};
 
 
 function mapDispatchToProps(dispatch) {
