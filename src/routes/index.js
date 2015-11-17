@@ -1,15 +1,10 @@
-import React from 'react';
-
-import { Router, Route } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-
-import App from 'components/App';
-import Counter from 'components/Counter';
+import React                 from 'react';
+import { Route, IndexRoute } from 'react-router';
+import CoreLayout            from 'layouts/CoreLayout';
+import HomeView              from 'views/HomeView';
 
 export default (
-  <Router history={createBrowserHistory()}>
-    <Route path="/" component={App}>
-      <Route path="counter" component={Counter} />
-    </Route>
-  </Router>
+  <Route path='/' component={CoreLayout}>
+    <IndexRoute component={HomeView} />
+  </Route>
 );

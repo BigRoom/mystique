@@ -1,9 +1,11 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { persistState }                                           from 'redux-devtools';
-import reducers                                                   from 'reducers/index';
-import createLogger                                               from 'redux-logger';
-import DevTools                                                   from 'containers/DevTools';
-import thunk                                                      from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { reduxReactRouter }                      from 'redux-router';
+import createHistory                             from 'history/lib/createBrowserHistory';
+import createLogger                              from 'redux-logger';
+import reducers                                  from 'reducers';
+import DevTools                                  from 'containers/DevTools';
+import thunk                                     from 'redux-thunk';
+import routes                                    from 'routes'
 
 const logger = createLogger();
 
@@ -24,15 +26,15 @@ const crashReporter = store => next => action => {
 
 const finalCreateStore = compose(
   applyMiddleware(thunk, logger, crashReporter),
-  DevTools.instrument(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  reduxReactRouter({ routes, createHistory }),
+  DevTools.instrument()
 )(createStore);
 
 const store = finalCreateStore(reducers);
 
 if (module.hot) {
   module.hot.accept('../reducers', () => {
-    store.replaceReducer(combineReducers(require('../reducers')));
+    store.replaceReducer((require('../reducers')));
   });
 }
 

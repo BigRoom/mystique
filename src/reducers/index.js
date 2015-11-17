@@ -1,10 +1,9 @@
-export { default as counter } from 'reducers/counter';
 import { combineReducers } from 'redux';
-import counter from 'reducers/counter';
 import { messages, channels } from 'reducers/chat';
+import { routerStateReducer } from 'redux-router';
 
 export default combineReducers({
-  counter,
+  router: routerStateReducer,
   messages,
   channels
 });

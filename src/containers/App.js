@@ -1,7 +1,8 @@
-import React, { Component }                                       from 'react';
-import { Provider }                                               from 'react-redux';
-import DevTools                                                   from 'containers/DevTools';
-import Wrapper                                                    from 'containers/Wrapper';
+import React, { Component } from 'react';
+import { ReduxRouter }      from 'redux-router';
+import { Provider }         from 'react-redux';
+import DevTools             from 'containers/DevTools';
+import routes               from 'routes';
 
 export default class App extends Component {
   componentDidMount() {
@@ -13,8 +14,10 @@ export default class App extends Component {
     return (
       <div className='root-container'>
         <Provider store={store}>
-          <div className='dev-wrapper'>
-            <Wrapper />
+          <div>
+            <ReduxRouter>
+              {routes}
+            </ReduxRouter>
             <DevTools />
           </div>
         </Provider>
