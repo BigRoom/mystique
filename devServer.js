@@ -2,15 +2,19 @@ var path = require('path');
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.config.dev');
+var fs = require('fs');
 
 var app = express();
-var compiler = webpack(config);
+var compiler = webpack(config, function(err, stats) {
+  var jsonStats = stats.toJson()
+  fs.writeFileSync('stats.json', JSON.stringify(jsonStats), 'utf8', function(err) {
+    if (err) throw err;
+  });
+});
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,
-  stats: {
-    colors: true
-  }
+  noInfo: true
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));

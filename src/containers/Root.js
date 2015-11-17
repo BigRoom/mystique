@@ -4,7 +4,7 @@ import { Provider }         from 'react-redux';
 import DevTools             from 'containers/DevTools';
 import routes               from 'routes';
 
-export default class App extends Component {
+export default class Root extends Component {
   componentDidMount() {
     // use require since import and export can only appear at the top level
     require('events/websocket')
