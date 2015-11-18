@@ -13,6 +13,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -21,6 +23,10 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
+      },
+      compress : {
+        'unused'    : true,
+        'dead_code' : true
       }
     })
   ],

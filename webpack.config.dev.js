@@ -14,7 +14,13 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        '__DEBUG__': JSON.stringify(true)
+      }
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   resolve: {
     root: path.resolve('./src'),
