@@ -10,7 +10,7 @@ import store from 'store';
 import ws from 'events/ws';
 import { bindActionCreators } from 'redux';
 import * as chatActions from 'actions/chat';
-import shallowEqual from 'utils/shallowEqual';
+import { observeStore } from 'utils';
 
 const actions = bindActionCreators(chatActions, store.dispatch);
 
@@ -19,19 +19,16 @@ ws.onopen = (event) => {
   // ws.sendmsg('bargle', { test: 'hi' });
 };
 
-let prevState = store.getState().messages;
+const select = (state) => state.messages
 
-const handleStoreChange = function() {
-  let state = store.getState().messages;
-  console.log('hi');
-  if(shallowEqual(prevState, state)) {
+let unsubscribe = observeStore(store, select, (state) => {
+  if(state.length) {
     ws.sendmsg('message', {...state[state.length - 1]});
   }
-}
-//
-// let unsubscribe = store.subscribe();
-// handleStoreChange();
+});
 
+// Handle the incoming messages
+// raw_msg is for debugging purposes only, it has no corresponding reducer
 ws.onmessage = (message) => {
   const msg = JSON.parse(message.data);
   switch(msg.name) {

@@ -6,6 +6,7 @@ export default class ChatView extends Component {
     return (
       <div>
         <h1>Hello, welcome to bigroom</h1>
+        <p>maybe have the front page here so it can be consolidated into one </p>
         <Link to='chat'>Go to chat</Link>
       </div>
     );

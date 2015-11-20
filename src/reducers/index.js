@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { messages, channels } from 'reducers/chat';
-import { routerStateReducer } from 'redux-router';
+import { routeReducer } from 'redux-simple-router';
 
 export default combineReducers({
-  router: routerStateReducer,
+  routing: routeReducer,
   messages,
   channels
 });

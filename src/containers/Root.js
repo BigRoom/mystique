@@ -1,23 +1,28 @@
-import React, { Component } from 'react';
-import { ReduxRouter }      from 'redux-router';
-import { Provider }         from 'react-redux';
-import DevTools             from 'containers/DevTools';
-import routes               from 'routes';
+import React, { Component }  from 'react';
+import { Router }            from 'react-router';
+import { Provider }          from 'react-redux';
+import { createHistory }     from 'history';
+import { syncReduxAndRouter} from 'redux-simple-router'
+import DevTools              from 'containers/DevTools';
+import routes                from 'routes';
+import store                 from 'store';
+
+const history = createHistory();
+syncReduxAndRouter(history, store);
 
 export default class Root extends Component {
   componentDidMount() {
     // use require since import and export can only appear at the top level
-    require('events/websocket')
+    require('events/websocket');
   }
   render() {
-    const { store } = this.props;
     return (
       <div className='root-container'>
         <Provider store={store}>
           <div>
-            <ReduxRouter>
+            <Router history={history}>
               {routes}
-            </ReduxRouter>
+            </Router>
             <DevTools />
           </div>
         </Provider>

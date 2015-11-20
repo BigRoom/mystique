@@ -7,11 +7,14 @@ export default class MessageInput extends Component {
     send_message: PropTypes.func.isRequired
   }
 
+  componentDidMount() {
+    this.refs.contents.focus();
+  }
+
   onEnter(e) {
     // prevent page from reloading
     e.preventDefault();
 
-    console.log(this.refs.contents.value);
     this.props.send_message(this.refs.contents.value);
     // clear the message area
     this.refs.contents.value = '';
