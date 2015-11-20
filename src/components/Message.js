@@ -3,11 +3,11 @@ import moment from 'moment';
 
 export default class Message extends Component {
   static propTypes = {
-    from: PropTypes.string,
+    from: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    time: PropTypes.number,
-    channel: PropTypes.string,
-    host: PropTypes.string
+    time: PropTypes.number.isRequired,
+    channel: PropTypes.string.isRequired,
+    host: PropTypes.string.isRequired
   };
 
   render() {
@@ -16,8 +16,8 @@ export default class Message extends Component {
     return (
       <div className='message-container'>
         <div>
-          <span className='message-info'>@{from}</span> <span className='text-muted'>{date.format('h:mm:ss a')}</span>
-          <span className='message-extra text-muted'> {channel} {host}</span>
+          <span className='message-info'>@{from}</span> <span className='text-muted'>{date.format('LT')}</span>
+          <span className='message-extra text-muted'> ({channel} {host})</span>
         </div>
         <div>
           <span className='message-content'>{content}</span><br/>

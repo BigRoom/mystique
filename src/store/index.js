@@ -14,18 +14,19 @@ const crashReporter = store => next => action => {
     return next(action)
   } catch (err) {
     console.error('Caught an exception!', err)
-    Raven.captureException(err, {
-      extra: {
-        action,
-        state: store.getState()
-      }
-    })
+    // Raven.captureException(err, {
+    //   extra: {
+    //     action,
+    //     state: store.getState()
+    //   }
+    // })
     throw err
   }
 }
 
 const finalCreateStore = compose(
-  applyMiddleware(thunk, logger, crashReporter),
+  // applyMiddleware(thunk, logger, crashReporter),
+  applyMiddleware(thunk, logger),
   reduxReactRouter({ routes, createHistory }),
   DevTools.instrument()
 )(createStore);

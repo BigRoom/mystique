@@ -8,22 +8,40 @@
 
 import store from 'store';
 import ws from 'events/ws';
-import { message_received, channel_received, raw_msg } from 'actions/chat';
+import { bindActionCreators } from 'redux';
+import * as chatActions from 'actions/chat';
+import shallowEqual from 'utils/shallowEqual';
+
+const actions = bindActionCreators(chatActions, store.dispatch);
 
 ws.onopen = (event) => {
-  ws.sendmsg('bargle', { test: 'hi' });
+  // TODO Implement authentication via websockets
+  // ws.sendmsg('bargle', { test: 'hi' });
 };
+
+let prevState = store.getState().messages;
+
+const handleStoreChange = function() {
+  let state = store.getState().messages;
+  console.log('hi');
+  if(shallowEqual(prevState, state)) {
+    ws.sendmsg('message', {...state[state.length - 1]});
+  }
+}
+//
+// let unsubscribe = store.subscribe();
+// handleStoreChange();
 
 ws.onmessage = (message) => {
   const msg = JSON.parse(message.data);
   switch(msg.name) {
     case 'MESSAGE':
-      store.dispatch(message_received(msg));
+      actions.message_received(msg);
     break;
     case 'CHANNELS':
-      store.dispatch(channel_received(msg));
+      actions.channel_received(msg);
     break;
     default:
-      store.dispatch(raw_msg(msg));
+      actions.raw_msg(msg);
   }
 }
