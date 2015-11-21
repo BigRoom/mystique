@@ -7,6 +7,8 @@ import DevTools              from 'containers/DevTools';
 import routes                from 'routes';
 import store                 from 'store';
 
+window.store = store;
+
 const history = createHistory();
 syncReduxAndRouter(history, store);
 
