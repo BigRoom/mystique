@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { routeReducer } from 'redux-simple-router';
 import { messages, channels } from 'reducers/chat';
-import { giphy } from 'reducers/giphy';
+import { giphy } from 'reducers/giphy'
+import { routeReducer } from 'utils/redux-simple-router';
 
 export default combineReducers({
   routing: routeReducer,

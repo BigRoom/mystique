@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { Router }            from 'react-router';
 import { Provider }          from 'react-redux';
 import createHistory         from 'history/lib/createBrowserHistory'
-import { syncReduxAndRouter} from 'redux-simple-router'
+import { syncReduxAndRouter} from 'utils/redux-simple-router'
 import DevTools              from 'containers/DevTools';
 import routes                from 'routes';
 import store                 from 'store';

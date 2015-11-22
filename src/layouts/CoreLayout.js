@@ -23,7 +23,7 @@ class CoreLayout extends Component {
 
     return (
       <div className='page-container'>
-        <nav className='navbar navbar-light bg-faded'>
+        <nav className='navbar navbar-light navbar-static-top bg-faded'>
           <Link to='/' className='navbar-brand'>Bigroom</Link>
           <ul className='nav navbar-nav'>
             {navItems}
