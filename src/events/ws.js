@@ -4,7 +4,6 @@ const ws = new WebSocket(`ws://${window.location.hostname}:4000`);
 
 ws.sendmsg = (name, data) => {
   if(ws.readyState === 1) {
-    console.log('sent message');
     ws.send(JSON.stringify({
       name: name.toUpperCase(),
       ...data

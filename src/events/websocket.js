@@ -22,8 +22,10 @@ ws.onopen = (event) => {
 const select = (state) => state.messages
 
 let unsubscribe = observeStore(store, select, (state) => {
-  if(state.length) {
-    ws.sendmsg('message', {...state[state.length - 1]});
+  let message = state[state.length - 1];
+  if(state.length && !message.sent) {
+    ws.sendmsg('message', message);
+    actions.sent_message(state.length - 1);
   }
 });
 

@@ -1,4 +1,4 @@
-import { MESSAGE_RECEIVED, CHANNEL_RECEIVED, RAW_MSG, SEND_MESSAGE } from 'constants/chat';
+import { MESSAGE_RECEIVED, CHANNEL_RECEIVED, RAW_MSG, SEND_MESSAGE, SENT_MESSAGE } from 'constants/chat';
 
 export default {
   message_received: (message) => ({ type: MESSAGE_RECEIVED, payload: { ...message }}),
@@ -9,6 +9,8 @@ export default {
       content: message,
       time: Date.now(),
       channel: "#something",
-      host: "192.168.1.1"
-  }})
+      host: "192.168.1.1",
+      sent: false
+  }}),
+  sent_message: (index) => ({ type: SENT_MESSAGE, payload: { index }})
 };

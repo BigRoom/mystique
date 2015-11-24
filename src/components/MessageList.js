@@ -15,7 +15,7 @@ export default class MessageList extends Component {
     return (
       <div className='messages-list' ref='messages'>
         {/* Use key of `i` since I keep forgetting to change the timestamp when manually sending events */}
-        {this.props.messages.map((message, i) => (<Message key={i} {...message} />))}
+        {this.props.messages.map((message, i) => <Message key={i} {...message} />)}
       </div>
     );
   }
