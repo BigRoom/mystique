@@ -21,10 +21,14 @@ ws.onopen = (event) => {
 
 const select = (state) => state.messages
 
+// TODO implement a redux middleware using action.meta.send
+
 let unsubscribe = observeStore(store, select, (state) => {
   let message = state[state.length - 1];
   if(state.length && !message.sent) {
-    ws.sendmsg('message', message);
+    let wsmsg = {...message};
+    delete wsmsg.sent;
+    ws.sendmsg('message', wsmsg);
     actions.sent_message(state.length - 1);
   }
 });
@@ -35,7 +39,7 @@ ws.onmessage = (message) => {
   const msg = JSON.parse(message.data);
   switch(msg.name) {
     case 'MESSAGE':
-      actions.message_received(msg);
+      actions.message_received({...msg, sent: true});
     break;
     case 'CHANNELS':
       actions.channel_received(msg);
