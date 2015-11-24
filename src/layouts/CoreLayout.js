@@ -13,13 +13,11 @@ class CoreLayout extends Component {
     const route = this.props.route.charAt(0) === '/' ? this.props.route.substring(1, this.props.route.length) : this.props.route;
     // const route = this.props.route.replace('^/', '');
 
-    const navItems = ['chat'].map((link, i) => {
-      return (
-        <li key={i} className={'nav-item' + (route === link ? ' active' : '')}>
-          <Link to={link} className='nav-link'>{link}</Link>
-        </li>
-      )
-    });
+    const navItems = ['chat'].map((link, i) =>
+      <li key={i} className={'nav-item' + (route === link ? ' active' : '')}>
+        <Link to={link} className='nav-link'>{link}</Link>
+      </li>
+    );
 
     return (
       <div className='page-container'>
