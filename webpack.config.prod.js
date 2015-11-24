@@ -1,4 +1,5 @@
 var path = require('path');
+var fs = require('fs');
 var webpack = require('webpack');
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new webpack.BannerPlugin(fs.readFileSync('README.md', 'utf8')),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
