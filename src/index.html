@@ -50,7 +50,7 @@
                 <div class="six columns">
                     <div class="chat-block">
                         <ul>
-                            <li ng-repeat="message in logs[selected]" ng-class="{'right': message.from == user.username}"><span class="username">{{ message.from }}:</span> {{ message.content }}</li>
+                            <li ng-repeat="message in logs[selected]" ng-class="{'right': message.user == user.username}"><span class="username">{{ message.user }}:</span> {{ message.content }}</li>
                         </ul>
                     </div>
 

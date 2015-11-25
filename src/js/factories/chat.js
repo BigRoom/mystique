@@ -11,12 +11,13 @@
 
         var handlers = {
             'MESSAGE': function(d) {
-                if ($rootScope.logs[d.channel] === undefined) {
-                    $rootScope.logs[d.channel] = [];
+                var chan = d.channel_key.split("/")[1];
+                if ($rootScope.logs[chan] === undefined) {
+                    $rootScope.logs[chan] = [];
                 }
 
-                $rootScope.logs[d.channel].push(d);
-                console.log("%s [%s]: %s", d.from, d.channel, d.content)
+                $rootScope.logs[chan].push(d);
+                console.log("%s [%s]: %s", d.from, d.chan, d.content)
                 adjustBottom();
             },
             'CHANNELS': function(d) {
@@ -99,10 +100,7 @@
                             for (var i = 0; i < data.data.data.length; i++) {
                                 var msg = data.data.data[i];
 
-                                $rootScope.logs[channel].unshift({
-                                    'from': msg.user,
-                                    'content': msg.content,
-                                });
+                                $rootScope.logs[channel].unshift(msg);
                             }
 
                             adjustBottom();
